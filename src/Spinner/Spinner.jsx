@@ -9,9 +9,3 @@ class Spinner extends Component {
 }
 
 export default Spinner;
-
-// <Posrers></Posrers>
-
-// <Offline>
-// 	<OflineMessage/>
-// </Offline>

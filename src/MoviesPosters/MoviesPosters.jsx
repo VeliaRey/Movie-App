@@ -39,7 +39,6 @@ class MoviesPosters extends Component {
 
   componentDidUpdate(prevProps) {
     const { searchLabel, selectedPage, tabRated } = this.props;
-    // console.log('peops', prevProps)
     if (searchLabel !== prevProps.searchLabel) {
       this.newRequest();
     }
@@ -147,10 +146,10 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
                 >
                   {film.vote_average.toFixed(1)}
                 </div>
-                <p className="posters_data">
+                <p className="posters-data">
                   {format(new Date(film.release_date || null), "MMMM d, y")}
                 </p>
-                <div className="posters_genre">
+                <div className="posters-genre">
                   {genres.genres.map(
                     (gen) =>
                       film.genre_ids.includes(gen.id) && (
@@ -158,7 +157,7 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
                       ),
                   )}
                 </div>
-                <p className="posters_text">{limitText(film.overview, 100)}</p>
+                <p className="posters-text">{limitText(film.overview, 100)}</p>
                 <Rate
                   count={10}
                   onChange={(value) => rateMovie(film.id, value)}

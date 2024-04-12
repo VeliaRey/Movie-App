@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 import { debounce } from "lodash";
 
 import Search from "../Search/Search";
@@ -81,9 +80,7 @@ class App extends Component {
       genres,
     } = this.state;
 
-    console.log(this.state);
     return (
-      // <div className='movies-app'>
       <>
         <MenuTabs onTabsSwitch={this.onTabsSwitch} />
         <GenresProvider value={genres}>
@@ -104,7 +101,6 @@ class App extends Component {
         </GenresProvider>
         <Pagi allPages={allPages} onSelectedPage={this.onSelectedPages} />
       </>
-      // </div>
     );
   }
 }

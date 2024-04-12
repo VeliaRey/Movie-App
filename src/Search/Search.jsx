@@ -2,15 +2,6 @@ import React, { Component } from "react";
 import "./Search.css";
 
 class Search extends Component {
-  // state = {
-  // 	searchLabel: ""
-  // }
-
-  // onChange2 = (event) => {
-  // 		this.setState = {
-  // 			searchLabel: event.target.value
-  // 		}
-  // 	}
   render() {
     const { searchLabel, onLabelChange } = this.props;
     return (

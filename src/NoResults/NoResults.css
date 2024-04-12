@@ -1,19 +1,13 @@
 .results-conteiner {
   display: flex;
   flex-wrap: wrap;
-  /* flex-flow: column; */
   font-size: 24px;
   width: 100%;
   color: cornflowerblue;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  /* border-radius: 5px; */
   line-height: 32px;
   align-items: center;
   justify-content: center;
 }
-
-/* .results-message {
-	width: 100%;
-} */
