@@ -1,0 +1,13 @@
+.ant-tabs {
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ant-tabs-nav {
+  align-self: center;
+}
+
+.ant-tabs-nav-operations {
+  font-family: "Inter";
+}

@@ -1,0 +1,7 @@
+.offline-message {
+  font-size: 30px;
+  color: tomato;
+  border: 2px solid tomato;
+  text-align: center;
+  margin-left: 50px;
+}

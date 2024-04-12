@@ -1,0 +1,142 @@
+/* .movies-posters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 37px;
+} */
+
+.root {
+  max-width: 1150px;
+  padding: 35px;
+}
+
+.posters {
+  width: 451px;
+  height: 281px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+  max-width: 50%;
+}
+
+.posters-image {
+  width: 183px;
+  height: 281px;
+  float: left;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.posters-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-right: 20px;
+  height: 281px;
+  position: relative;
+}
+
+.posters-title {
+  font-size: 20px;
+  line-height: 28px;
+  text-align: left;
+  font-family: "Inter";
+  font-weight: 400;
+  max-width: 200px;
+  margin: 0;
+  letter-spacing: 0em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.posters_data {
+  color: rgba(130, 126, 126, 1);
+  font-size: 12px;
+  line-height: 22px;
+  text-align: left;
+  font-family: "Inter";
+  font-weight: 500;
+
+  margin-top: 7px;
+  margin-bottom: 9px;
+}
+
+.posters_genre {
+  display: flex;
+  gap: 8px 4px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* .genre {
+	padding: 3px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14.52px;
+	text-align: left;
+	border: 1px solid rgba(217, 217, 217, 1);
+	border-radius: 2px;
+	color: rgba(0, 0, 0, 0.65);
+	font-family: "Inter";
+	font-weight: 400;
+	background-color:  rgba(0, 0, 0, 0.015);
+} */
+
+.posters_text {
+  font-family: "Inter";
+  font-size: 12px;
+  line-height: 22px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.ant-rate {
+  /* font-size: 16px; */
+  /* position: absolute; */
+  margin-top: auto;
+  margin-bottom: 15px;
+  margin-top: auto;
+  font-size: 15px;
+}
+
+.posters-rating {
+  font-size: 12px;
+  /* padding-top: 6px;
+  padding-left: 6px; */
+  height: 30px;
+  width: 30px;
+  border: 2px solid;
+  border-radius: 50%;
+  right: 8px;
+  top: 12px;
+  position: absolute;
+  line-height: 26px;
+  text-align: center;
+  color: black;
+}
+
+@media (max-width: 1010px) {
+  .posters-image {
+    width: 60px;
+    height: 91px;
+    margin-right: 13px;
+    object-fit: cover;
+  }
+
+  .posters-info {
+    display: block;
+    padding: 0;
+    height: 245px;
+  }
+
+  .posters {
+    width: 378px;
+    height: 245px;
+    padding: 6px 10px;
+    max-width: 100%;
+  }
+
+  .ant-rate {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
