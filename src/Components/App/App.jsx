@@ -1,12 +1,12 @@
-import React, { Component } from "react";
 import { debounce } from "lodash";
+import React, { Component } from "react";
 
 import Search from "../Search/Search";
 import Movies from "../Movies/Movies";
-import MenuTabs from "../Tabs/Tabs";
-import Pagi from "../Pagination/Pagination";
 import MoviesApi from "../MoviesApi/MoviesApi";
-import { GenresProvider } from "../apiService-context/apiService-context";
+import Pagi from "../Pagination/Pagination";
+import MenuTabs from "../Tabs/Tabs";
+import { GenresProvider } from "../../Services/apiService-context";
 
 class App extends Component {
   debounceUpdateSearchValue = debounce((value) => {
@@ -46,6 +46,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
+    localStorage.clear();
     this.moviesApi.getGenres().then((res) => {
       this.setState({
         genres: res,
@@ -62,12 +63,15 @@ class App extends Component {
   onTabsSwitch = (flag) => {
     this.setState({
       tabRated: flag,
+      selectedPage: 1,
     });
   };
 
   rateMovie = (movieId, value) => {
     const { guestSessionId } = this.state;
     this.moviesApi.addRating(movieId, guestSessionId, value);
+
+    localStorage.setItem(movieId, JSON.stringify(value));
   };
 
   render() {
@@ -99,7 +103,11 @@ class App extends Component {
             guestSessionId={guestSessionId}
           />
         </GenresProvider>
-        <Pagi allPages={allPages} onSelectedPage={this.onSelectedPages} />
+        <Pagi
+          allPages={allPages}
+          onSelectedPage={this.onSelectedPages}
+          selectedPage={selectedPage}
+        />
       </>
     );
   }

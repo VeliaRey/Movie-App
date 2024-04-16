@@ -88,6 +88,22 @@
   color: black;
 }
 
+.rating-red {
+  border-color: #e90000;
+}
+
+.rating-orange {
+  border-color: #e97e00;
+}
+
+.rating-yellow {
+  border-color: #e9d100;
+}
+
+.rating-green {
+  border-color: #66e900;
+}
+
 @media (max-width: 1010px) {
   .posters-image {
     width: 60px;

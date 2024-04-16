@@ -5,13 +5,13 @@ import "./Pagination.css";
 
 class Pagi extends Component {
   render() {
-    const { allPages, onSelectedPage } = this.props;
+    const { allPages, onSelectedPage, selectedPage } = this.props;
     return (
       <div className="pagination">
         <Pagination
-          defaultCurrent={1}
           total={allPages * 10}
           onChange={onSelectedPage}
+          current={selectedPage}
         />
       </div>
     );

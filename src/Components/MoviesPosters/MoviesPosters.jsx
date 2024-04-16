@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import MoviesApi from "../MoviesApi/MoviesApi";
 import "./MoviesPosters.css";
 
-import limitText from "../LimitText/LimitText";
-import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
+import { Rate, Tag } from "antd";
 import { format } from "date-fns";
-import { Rate } from "antd";
-import { Tag } from "antd";
 import { Offline } from "react-detect-offline";
-import Spinner from "../Spinner/Spinner";
-import OfflineMessage from "../OfflineMessage/OfflineMessage";
+import ErrorIndicator from "../ErrorIndicator/ErrorIndicator";
+import limitText from "../../utils/LimitText";
 import NoResults from "../NoResults/NoResults";
-import { GenresConsumer } from "../apiService-context/apiService-context";
+import OfflineMessage from "../OfflineMessage/OfflineMessage";
+import Spinner from "../Spinner/Spinner";
+import { GenresConsumer } from "../../Services/apiService-context";
 import Pablo from "./Pablo.jpg";
 
 class MoviesPosters extends Component {
@@ -39,6 +38,10 @@ class MoviesPosters extends Component {
 
   componentDidUpdate(prevProps) {
     const { searchLabel, selectedPage, tabRated } = this.props;
+
+    if (tabRated !== prevProps.tabRated) {
+      this.newRequest();
+    }
     if (searchLabel !== prevProps.searchLabel) {
       this.newRequest();
     }
@@ -48,9 +51,6 @@ class MoviesPosters extends Component {
       });
       this.newRequest();
     }
-    if (tabRated !== prevProps.tabRated) {
-      this.newRequest();
-    }
   }
 
   newRequest() {
@@ -58,12 +58,16 @@ class MoviesPosters extends Component {
 
     this.setState({
       isLoaded: false,
+      error: false,
     });
+
     if (!tabRated) {
-      this.moviesApi
-        .getAllMovies(searchLabel, selectedPage)
-        .then((res) => this.updateMovies(res))
-        .catch((err) => this.onError(err));
+      if (searchLabel.trim() !== "") {
+        this.moviesApi
+          .getAllMovies(searchLabel, selectedPage)
+          .then((res) => this.updateMovies(res))
+          .catch((err) => this.onError(err));
+      }
     } else {
       this.moviesApi
         .getRating(guestSessionId, selectedPage)
@@ -82,29 +86,32 @@ class MoviesPosters extends Component {
   }
 
   switchColors(voteAverage) {
-    let color = "#66E900";
-    if (voteAverage <= 3) color = "#E90000";
-    if (voteAverage > 3 && voteAverage <= 5) color = "##E97E00";
-    if (voteAverage > 5 && voteAverage <= 7) color = "#E9D100";
-    return {
-      borderColor: color,
-    };
+    let classColor = "rating-green";
+    if (voteAverage <= 3) classColor = "rating-red";
+    if (voteAverage > 3 && voteAverage <= 5) classColor = "rating-yellow";
+    if (voteAverage > 5 && voteAverage <= 7) classColor = "rating-orange";
+    return `posters-rating ${classColor}`;
   }
 
   render() {
     const { movieData, isLoaded, error } = this.state;
-    const { rateMovie } = this.props;
+    const { rateMovie, searchLabel } = this.props;
 
     const hasData = !(isLoaded || error);
     const errorMessage = error ? <ErrorIndicator /> : null;
-    const spinner = !isLoaded && !error ? <Spinner /> : null;
-    const content = isLoaded ? (
-      <MoviesShow
-        movieData={movieData}
-        rateMovie={rateMovie}
-        switchColors={this.switchColors}
-      />
-    ) : null;
+    const spinner =
+      !isLoaded && !error && searchLabel.trim().length !== 0 ? (
+        <Spinner />
+      ) : null;
+    const content =
+      isLoaded && !error ? (
+        <MoviesShow
+          movieData={movieData}
+          rateMovie={rateMovie}
+          switchColors={this.switchColors}
+        />
+      ) : null;
+
     const noResults = movieData.length === 0 && !hasData ? <NoResults /> : null;
 
     return (
@@ -140,10 +147,7 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
 
               <div className="posters-info">
                 <h5 className="posters-title">{film.title}</h5>
-                <div
-                  className="posters-rating"
-                  style={switchColors(film.vote_average)}
-                >
+                <div className={switchColors(film.vote_average)}>
                   {film.vote_average.toFixed(1)}
                 </div>
                 <p className="posters-data">
@@ -153,7 +157,7 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
                   {genres.genres.map(
                     (gen) =>
                       film.genre_ids.includes(gen.id) && (
-                        <Tag key={Math.random() * 1000000}> {gen.name}</Tag>
+                        <Tag key={gen.name}> {gen.name}</Tag>
                       ),
                   )}
                 </div>
@@ -161,7 +165,7 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
                 <Rate
                   count={10}
                   onChange={(value) => rateMovie(film.id, value)}
-                  defaultValue={film.rating}
+                  defaultValue={localStorage.getItem(film.id)}
                 />
               </div>
             </div>
@@ -173,5 +177,3 @@ function MoviesShow({ movieData, rateMovie, switchColors }) {
 }
 
 export default MoviesPosters;
-
-// https://briozaffiro.ru/i/Arisha_golden_chinchilla_cat_photo400_300.JPG

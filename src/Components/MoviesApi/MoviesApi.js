@@ -7,6 +7,13 @@ const getOptions = {
   },
 };
 
+const getingOptions = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+  },
+};
+
 class MoviesApi {
   _apiBase = "https://api.themoviedb.org";
   async getResourse(url, options) {
@@ -53,8 +60,8 @@ class MoviesApi {
 
   async getRating(userId, selectedPage) {
     const res = await this.getResourse(
-      `/3/guest_session/${userId}/rated/movies?language=en-US&sort_by=created_at.asc$page=${selectedPage}`,
-      getOptions,
+      `/3/guest_session/${userId}/rated/movies?api_key=9bb270d8c31fcdf78e0b015b325d92f5&language=en-US&sort_by=created_at.asc$page=${selectedPage}`,
+      getingOptions,
     );
     return res;
   }
@@ -64,7 +71,7 @@ class MoviesApi {
       "/3/genre/movie/list?language=en",
       getOptions,
     );
-    console.log(res);
+
     return res;
   }
 }
