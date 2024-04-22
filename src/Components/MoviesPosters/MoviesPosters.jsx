@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MoviesApi from "../MoviesApi/MoviesApi";
+import MoviesApi from "../../Services/MoviesApi";
 import "./MoviesPosters.css";
 
 import { Rate, Tag } from "antd";

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import Search from "../Search/Search";
 import Movies from "../Movies/Movies";
-import MoviesApi from "../MoviesApi/MoviesApi";
+import MoviesApi from "../../Services/MoviesApi";
 import Pagi from "../Pagination/Pagination";
 import MenuTabs from "../Tabs/Tabs";
 import { GenresProvider } from "../../Services/apiService-context";
@@ -103,6 +103,7 @@ class App extends Component {
             guestSessionId={guestSessionId}
           />
         </GenresProvider>
+
         <Pagi
           allPages={allPages}
           onSelectedPage={this.onSelectedPages}

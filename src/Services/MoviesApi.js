@@ -60,7 +60,7 @@ class MoviesApi {
 
   async getRating(userId, selectedPage) {
     const res = await this.getResourse(
-      `/3/guest_session/${userId}/rated/movies?api_key=9bb270d8c31fcdf78e0b015b325d92f5&language=en-US&sort_by=created_at.asc$page=${selectedPage}`,
+      `/3/guest_session/${userId}/rated/movies?api_key=9bb270d8c31fcdf78e0b015b325d92f5&language=en-US&page=${selectedPage}&sort_by=created_at.asc`,
       getingOptions,
     );
     return res;
